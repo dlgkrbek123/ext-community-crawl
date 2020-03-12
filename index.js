@@ -17,7 +17,7 @@ var fileList = [
   "theqoo"
 ];
 
-var http = require("https");
+var http = require("http");
 var express = require("express");
 var fs = require("promise-fs");
 
@@ -36,7 +36,7 @@ app.get("/", function(req, res) {
 
   const fPromises = fileList.map(f => {
     return fs
-      .readFile(`./${f}.json`)
+      .readFile(`${f}.json`)
       .then(content => {
         result[f] = JSON.parse(content);
       })
@@ -50,6 +50,6 @@ app.get("/", function(req, res) {
 
 var server = http.createServer(app);
 
-server.listen(52273, function() {
+server.listen(process.env.PORT, function() {
   console.log("server is running");
 });
