@@ -121,7 +121,7 @@ exports.makeCrawler = (
   refineItems
 ) => async crawl_item_count => {
   const browser = await puppeteer.launch({
-    headless: false
+    headless: true
   });
   const page = await browser.newPage();
 
@@ -131,9 +131,17 @@ exports.makeCrawler = (
     const refined_items = refineItems(crawl_items);
     testCrawlItem(refined_items);
 
-    fs.writeFile(`${name}.json`, JSON.stringify(refined_items), () => {});
+    const filter_item = refined_items.filter(({ title }) => {
+      return (
+        !title.includes("ㅇㅎ") &&
+        !title.includes("후방") &&
+        !title.includes("ㅎㅂ")
+      );
+    });
 
-    console.log(`${name} crawled well (${refined_items.length})`);
+    fs.writeFile(`${name}.json`, JSON.stringify(filter_item), () => {});
+
+    console.log(`${name} crawled well (${filter_item.length})`);
     // console.log(JSON.stringify(refined_items))
   } catch (err) {
     console.log(`below error occured when crawling ${name}\n`);

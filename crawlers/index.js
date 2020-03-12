@@ -12,7 +12,7 @@ const fmkorea = require("./fmkorea/crawl");
 const theqoo = require("./theqoo/crawl");
 
 // const cronTime = '0 0 */3 * * *';
-const cronTime = "0 */15 * * * *";
+const cronTime = "30 */20 * * * *";
 const CRAWL_ITEM_COUNT = 20;
 
 console.log("Register CommunityCrawling Cron:", new Date().toISOString());
