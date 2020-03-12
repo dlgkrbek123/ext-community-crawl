@@ -32,7 +32,17 @@ app.all("/*", function(req, res, next) {
 });
 
 app.get("/", function(req, res) {
-  var result = {};
+  var result = {
+    instiz: [],
+    fmkorea: [],
+    ppomppu: [],
+    inven: [],
+    dcinside: [],
+    mlbpark: [],
+    ruliweb: [],
+    slrclub: [],
+    theqoo: []
+  };
 
   const fPromises = fileList.map(f => {
     return fs
