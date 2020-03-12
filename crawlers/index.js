@@ -19,16 +19,16 @@ console.log("Register CommunityCrawling Cron:", new Date().toISOString());
 
 async function crawlCommunities() {
   await Promise.all([
-    ruliweb(CRAWL_ITEM_COUNT),
-    slrclub(CRAWL_ITEM_COUNT),
-    ppomppu(CRAWL_ITEM_COUNT),
-    instiz(CRAWL_ITEM_COUNT),
-    inven(CRAWL_ITEM_COUNT),
-    clien(CRAWL_ITEM_COUNT),
-    mlbpark(CRAWL_ITEM_COUNT),
-    dcinside(CRAWL_ITEM_COUNT),
-    fmkorea(CRAWL_ITEM_COUNT),
-    theqoo(CRAWL_ITEM_COUNT)
+    ruliweb(CRAWL_ITEM_COUNT)
+    // slrclub(CRAWL_ITEM_COUNT),
+    // ppomppu(CRAWL_ITEM_COUNT),
+    // instiz(CRAWL_ITEM_COUNT),
+    // inven(CRAWL_ITEM_COUNT),
+    // clien(CRAWL_ITEM_COUNT),
+    // mlbpark(CRAWL_ITEM_COUNT),
+    // dcinside(CRAWL_ITEM_COUNT),
+    // fmkorea(CRAWL_ITEM_COUNT),
+    // theqoo(CRAWL_ITEM_COUNT)
   ]);
 }
 
