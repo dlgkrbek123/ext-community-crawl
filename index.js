@@ -5,8 +5,6 @@ crawlCommunities.every3Hour.start();
 
 console.info("Cron Server App Started");
 
-var http = require("http");
-
 var fileList = [
   "instiz",
   "inven",
@@ -19,11 +17,19 @@ var fileList = [
   "theqoo"
 ];
 
-var http = require("http");
+var http = require("https");
 var express = require("express");
 var fs = require("promise-fs");
 
 var app = express();
+
+const options = {};
+
+app.all("/*", function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 app.get("/", function(req, res) {
   var result = {};
