@@ -136,7 +136,8 @@ exports.makeCrawler = (
       return (
         !title.includes("ㅇㅎ") &&
         !title.includes("후방") &&
-        !title.includes("ㅎㅂ")
+        !title.includes("ㅎㅂ") &&
+        !title.includes("약후")
       );
     });
 
