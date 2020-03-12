@@ -12,24 +12,37 @@ const fmkorea = require("./fmkorea/crawl");
 const theqoo = require("./theqoo/crawl");
 
 // const cronTime = '0 0 */3 * * *';
-const cronTime = "30 */20 * * * *";
+const cronTime = "0 */20 * * * *";
 const CRAWL_ITEM_COUNT = 20;
 
 console.log("Register CommunityCrawling Cron:", new Date().toISOString());
 
+// async function crawlCommunities() {
+//   await Promise.all([
+//     ruliweb(CRAWL_ITEM_COUNT)
+//     slrclub(CRAWL_ITEM_COUNT),
+//     ppomppu(CRAWL_ITEM_COUNT),
+//     instiz(CRAWL_ITEM_COUNT),
+//     inven(CRAWL_ITEM_COUNT),
+//     clien(CRAWL_ITEM_COUNT),
+//     mlbpark(CRAWL_ITEM_COUNT),
+//     dcinside(CRAWL_ITEM_COUNT),
+//     fmkorea(CRAWL_ITEM_COUNT),
+//     theqoo(CRAWL_ITEM_COUNT)
+//   ]);
+// }
+
 async function crawlCommunities() {
-  await Promise.all([
-    ruliweb(CRAWL_ITEM_COUNT)
-    // slrclub(CRAWL_ITEM_COUNT),
-    // ppomppu(CRAWL_ITEM_COUNT),
-    // instiz(CRAWL_ITEM_COUNT),
-    // inven(CRAWL_ITEM_COUNT),
-    // clien(CRAWL_ITEM_COUNT),
-    // mlbpark(CRAWL_ITEM_COUNT),
-    // dcinside(CRAWL_ITEM_COUNT),
-    // fmkorea(CRAWL_ITEM_COUNT),
-    // theqoo(CRAWL_ITEM_COUNT)
-  ]);
+  await ruliweb(CRAWL_ITEM_COUNT);
+  await slrclub(CRAWL_ITEM_COUNT);
+  await ppomppu(CRAWL_ITEM_COUNT);
+  await instiz(CRAWL_ITEM_COUNT);
+  await inven(CRAWL_ITEM_COUNT);
+  await clien(CRAWL_ITEM_COUNT);
+  await mlbpark(CRAWL_ITEM_COUNT);
+  await dcinside(CRAWL_ITEM_COUNT);
+  await fmkorea(CRAWL_ITEM_COUNT);
+  await theqoo(CRAWL_ITEM_COUNT);
 }
 
 async function proc() {
