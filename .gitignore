@@ -1,0 +1,2 @@
+# only ignore the TODO file in the current directory, not subdir/TODO
+node_modules
