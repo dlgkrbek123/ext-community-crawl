@@ -12,7 +12,7 @@ const fmkorea = require("./fmkorea/crawl");
 const theqoo = require("./theqoo/crawl");
 
 // const cronTime = '0 0 */3 * * *';
-const cronTime = "0 15/* * * * *";
+const cronTime = "0 */15 * * * *";
 const CRAWL_ITEM_COUNT = 20;
 
 console.log("Register CommunityCrawling Cron:", new Date().toISOString());
@@ -20,7 +20,7 @@ console.log("Register CommunityCrawling Cron:", new Date().toISOString());
 async function crawlCommunities() {
   await Promise.all([
     ruliweb(CRAWL_ITEM_COUNT),
-    slrclub(CRAWL_ITEM_COUNT)
+    slrclub(CRAWL_ITEM_COUNT),
     ppomppu(CRAWL_ITEM_COUNT),
     instiz(CRAWL_ITEM_COUNT),
     inven(CRAWL_ITEM_COUNT),
