@@ -121,7 +121,8 @@ exports.makeCrawler = (
   refineItems
 ) => async crawl_item_count => {
   const browser = await puppeteer.launch({
-    headless: true
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
   });
   const page = await browser.newPage();
 
