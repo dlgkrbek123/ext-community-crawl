@@ -63,3 +63,7 @@ var server = http.createServer(app);
 server.listen(process.env.PORT, function() {
   console.log("server is running");
 });
+
+setInterval(() => {
+  http.get("http://ext-community-crawl.herokuapp.com/");
+}, 600000);
