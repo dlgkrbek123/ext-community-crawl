@@ -7,6 +7,7 @@ console.info("Cron Server App Started");
 
 var fileList = [
   "instiz",
+  "clien",
   "inven",
   "dcinside",
   "fmkorea",
