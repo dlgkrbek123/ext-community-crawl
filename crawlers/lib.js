@@ -42,8 +42,13 @@ exports.makeGetList = (crawl_list_url, getListItem, navToNextPage) => {
   };
 };
 
-exports.makeCrawlItems = (crawlItem, wait_selector, page_time_out) => {
-  return async (page, crawl_list) => {
+exports.makeCrawlItems = (
+  crawlItem,
+  wait_selector,
+  img_selector,
+  page_time_out
+) => {
+  return async (page, crawl_list, name) => {
     const crawl_items = [];
 
     for (let i = 0; i < crawl_list.length; i++) {
@@ -59,13 +64,24 @@ exports.makeCrawlItems = (crawlItem, wait_selector, page_time_out) => {
         });
 
         const item = await page.evaluate(crawlItem, src);
+
+        if (item.thumbnail) {
+          const handle = await page.$$(img_selector);
+          const buffer = await handle[0].screenshot();
+
+          fs.writeFileSync(
+            `./images/${name}/${crawl_items.length}.jpg`,
+            buffer
+          );
+        }
+
         crawl_items.push(item);
 
         if (page_time_out) {
           await sleep(page_time_out);
         }
       } catch (err) {
-        // console.log(err)
+        console.log(err);
       }
     }
 
@@ -121,14 +137,14 @@ exports.makeCrawler = (
   refineItems
 ) => async crawl_item_count => {
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: ["--no-sandbox", "--disable-setuid-sandbox"]
   });
   const page = await browser.newPage();
 
   try {
     const crawl_list = await getList(page, crawl_item_count);
-    const crawl_items = await crawlItems(page, crawl_list);
+    const crawl_items = await crawlItems(page, crawl_list, name);
     const refined_items = refineItems(crawl_items);
     testCrawlItem(refined_items);
 
