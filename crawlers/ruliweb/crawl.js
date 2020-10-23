@@ -51,7 +51,7 @@ const crawlItem = (src) => {
   const body_wrapper = content_view.querySelector(".view_content")
 
   const view_time_wrapper = content_view.querySelector(".user_info")
-  const view_time_children = [...view_time_wrapper.children].slice(-2)
+  const view_time_children = [...view_time_wrapper.children].slice(-3)
   const view_num_wrapper = view_time_children[0]
   const post_time_wrapper = view_time_children[1]
 

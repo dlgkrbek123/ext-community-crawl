@@ -67,7 +67,7 @@ const crawlItem = (src) => {
   const title_text = title_cmt_wrapper.querySelector("#nowsubject").innerText
   const comment_num_text = title_cmt_wrapper.querySelector("#view_cmt").innerText
 
-  const post_time_text = pst_time_vn_wrapper.querySelector("[itemprop=datePublished]").innerText
+  const post_time_text = pst_time_vn_wrapper.querySelector("[itemprop=datePublished]").title
   let view_num_text = null
 
   const wrapper_node_list = [...pst_time_vn_wrapper.childNodes]
@@ -121,16 +121,16 @@ const makeDoubleDigitText = (text) => {
   }
 }
 
-const processDoubleDigitByDelimeter = (text, delimeter, start_index) => {
-  const splitted_elements = text.split(delimeter)
-  let result = ""
+// const processDoubleDigitByDelimeter = (text, delimeter, start_index) => {
+//   const splitted_elements = text.split(delimeter)
+//   let result = ""
 
-  for (let idx = start_index; idx < splitted_elements.length; idx++) {
-    splitted_elements[idx] = makeDoubleDigitText(splitted_elements[idx])
-  }
+//   for (let idx = start_index; idx < splitted_elements.length; idx++) {
+//     splitted_elements[idx] = makeDoubleDigitText(splitted_elements[idx])
+//   }
 
-  return splitted_elements.join(delimeter)
-}
+//   return splitted_elements.join(delimeter)
+// }
 
 const refineItems = (crawl_items) => {
   return crawl_items.map((item) => {
@@ -143,18 +143,18 @@ const refineItems = (crawl_items) => {
       thumbnail
     } = item
 
-    const extracted_post_time_text = post_time_text.split("(")[1].replace(/[^\d\.\s:]/g, "")
-    const split_post_time = extracted_post_time_text.split(" ")
 
-    const date_text = processDoubleDigitByDelimeter(split_post_time[0], ".", 1).replace(/\./g, "-")
-    const time_text = processDoubleDigitByDelimeter(split_post_time[1], ":", 0)
+
+    const split_post_time = post_time_text.split(" ")
+    const date_text = split_post_time[0].replace(/\./g, '-') 
+    const time_text = split_post_time[1].split(':').map(value => value.length <2 ? `0${value}`: value ).join(':')
 
     return {
       src,
       title: title_text,
       view_num: parseInt(view_num_text.replace(/\D/g, "")),
       comment_num: parseInt(comment_num_text.replace(/\D/g, "")),
-      post_time: `${date_text} ${time_text}:00`,
+      post_time: `${date_text} ${time_text}`,
       thumbnail
     }
   })
